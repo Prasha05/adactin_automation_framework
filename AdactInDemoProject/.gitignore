@@ -1,0 +1,9 @@
+# Ignore compiled files and test output
+*.class
+target/
+test-output/
+*.log
+
+# Ignore IDE-specific files
+.idea/
+*.iml
