@@ -2,55 +2,61 @@
 
 ## Overview
 
-This project is an automation framework designed for testing the Adactin Hotel Demo website using Selenium WebDriver. It follows industry-standard best practices and is structured using the Page Object Model (POM). The framework is built with Maven and integrates TestNG, Apache POI for data-driven testing, and Extent Reports for enhanced test reporting.
+This project is a comprehensive automation testing framework built for the Adactin Hotel Demo website. It follows industry-standard best practices using **Selenium WebDriver**, **Java**, and the **Page Object Model (POM)**. The framework is structured using **Maven**, and integrates **TestNG** for test execution, **Apache POI** for data-driven testing, **Extent Reports** for reporting, and **Log4j 2** for detailed logging.
 
 ## Features
 
-* **Selenium WebDriver** for browser automation
+- ✅ **Selenium WebDriver** – For browser automation.
+- ✅ **TestNG** – For structured test execution and assertions.
+- ✅ **Maven** – For project management and dependencies.
+- ✅ **Page Object Model (POM)** – For clean, reusable, and scalable code.
+- ✅ **Apache POI** – For reading test data from Excel files.
+- ✅ **Extent Reports** – For visual HTML test reporting.
+- ✅ **Log4j 2** – For structured logging (file-based).
+- 🔄 **Jenkins** – Planned for future CI/CD integration.
 
-* **TestNG** for test execution and reporting
+## Project Structure
 
-* **Maven** for dependency management
-
-* **Page Object Model (POM)** for maintainability
-
-* **Apache POI** for reading test data from Excel files
-
-* **Extent Reports** for rich test execution reports
-
-* **Log4j** for logging (Planned integration)
-
-* **Jenkins** for CI/CD (Planned integration)
+- `src/test/resources/ConfigFiles` – Application configuration (`config.properties`)
+- `src/test/resources/TestData` – Excel data files used in tests
+- `src/test/resources/log4j2.xml` – Log4j 2 configuration
+- `logs/` – Directory where log files are saved
+- `test-output/ExtentReport.html` – Extent Reports after execution
+- `test-output/` – TestNG default reports
 
 ## Prerequisites
 
-Ensure you have the following installed:
+- Java 17 (OpenJDK 17.0.13 or later)
+- Maven
+- TestNG (IDE plugin for Eclipse or IntelliJ)
+- ChromeDriver / FirefoxDriver (handled via WebDriverManager)
 
-* **Java 17 (OpenJDK 17.0.13)**
+## How to Execute
 
-* **Maven**
+1. Clone this repository.
+2. Update values in `config.properties` (browser, URL, credentials).
+3. Run tests using:
+   - `mvn clean test`
+   - or through your IDE with TestNG
 
-* **TestNG Plugin (for IDE execution)**
+## Logging
 
-* **Selenium WebDriver**
+- Logging is handled using **Log4j 2**.
+- Logs are stored in the `logs/test-log.log` file.
+- Console logging is currently disabled (can be enabled in `log4j2.xml`).
 
-## Test Reports
+## Reporting
 
-* **Extent Reports** are generated in the test-output/ExtentReports/ folder.
-
-* **TestNG reports** are available in the test-output/ folder.
+- **Extent Reports**: `test-output/ExtentReport.html`
+- **TestNG Reports**: `test-output/index.html`
 
 ## Future Enhancements
 
-* Integrate **Log4j** for better logging.
-
-* Implement **Jenkins** for CI/CD pipeline.
-
-* Extend test coverage with more positive/negative scenarios.
+- 🔄 CI/CD integration using Jenkins.
+- ✏️ Expand test coverage with more scenarios and validation logic.
 
 ## Author
 
-**PRASANTH T**
+**Prasanth T**
 
-This project is created for learning and demonstration purposes.
-
+> This project is a self-learning initiative to demonstrate real-world test automation using best practices.
