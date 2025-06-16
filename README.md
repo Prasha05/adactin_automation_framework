@@ -15,14 +15,27 @@ This project is a comprehensive automation testing framework built for the Adact
 - ✅ **Log4j 2** – For structured logging (file-based).
 - 🔄 **Jenkins** – Planned for future CI/CD integration.
 
-## Project Structure
+## 📁 Project Structure
 
-- `src/test/resources/ConfigFiles` – Application configuration (`config.properties`)
-- `src/test/resources/TestData` – Excel data files used in tests
-- `src/test/resources/log4j2.xml` – Log4j 2 configuration
-- `logs/` – Directory where log files are saved
-- `test-output/ExtentReport.html` – Extent Reports after execution
-- `test-output/` – TestNG default reports
+```
+src/
+├── main/
+│   └── java/
+│       └── com.adactinautomation/
+│           ├── pageobjects/         ← POM classes (Page Object Model)
+│           └── utilities/           ← Utilities: ConfigReader, LoggerHelper, ExcelUtils, etc.
+│
+├── test/
+│   └── java/
+│       └── com.adactinautomation.tests/   ← All TestNG test classes
+│
+└── resources/
+    ├── ConfigFiles/
+    │   └── config.properties        ← Configuration values (URL, browser, etc.)
+    ├── Testdata/
+    │   └── AdactIn_TestData.xlsx    ← Excel test data
+    └── log4j2.xml                   ← Log4j configuration file
+```
 
 ## Prerequisites
 
