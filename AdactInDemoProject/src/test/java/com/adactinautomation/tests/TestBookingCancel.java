@@ -11,6 +11,7 @@ import com.adactinautomation.utilities.ExtentReportListener;
 public class TestBookingCancel extends BaseTest {
 	@Test(priority = 17)
 	public void cancelBooking() throws InterruptedException {
+		ExtentReportListener.setDriver(driver);
 		pages.getLoginPage().loginToApplication(ConfigReader.getProperty("username"),
 				ConfigReader.getProperty("password"));
 		ExtentReportListener.logStep("Login successful with username: " + ConfigReader.getProperty("username"));

@@ -9,9 +9,12 @@ import org.testng.Assert;
 import com.adactinautomation.utilities.ElementUtils;
 import com.adactinautomation.utilities.ExcelUtils;
 import com.adactinautomation.utilities.ExtentReportListener;
+import com.adactinautomation.utilities.LoggerHelper;
+import org.apache.logging.log4j.Logger;
 
 public class BookingPage {
 	public WebDriver driver;
+	private static final Logger log = LoggerHelper.getLogger(BookingPage.class);
 
 	public BookingPage(WebDriver driver) {
 		this.driver = driver;
@@ -52,31 +55,31 @@ public class BookingPage {
 	private WebElement orderNo;
 
 	@FindBy(id = "first_name_span")
-	private static WebElement firstNameError;
+	private WebElement firstNameError;
 
 	@FindBy(id = "last_name_span")
-	private static WebElement lastNameError;
+	private WebElement lastNameError;
 
 	@FindBy(id = "address_span")
-	private static WebElement addressError;
+	private WebElement addressError;
 
 	@FindBy(id = "cc_num_span")
-	private static WebElement creditCardNumberError;
+	private WebElement creditCardNumberError;
 
 	@FindBy(id = "cc_type_span")
-	private static WebElement cardTypeError;
+	private WebElement cardTypeError;
 
 	@FindBy(xpath = "//label[contains(text(),'Please Select your Credit Card Expiry Month')]")
-	private static WebElement cardExpiryMonthError;
+	private WebElement cardExpiryMonthError;
 
 	@FindBy(xpath = "//label[contains(text(),'Please Select your Credit Card Expiry Year')]")
-	private static WebElement cardExpiryYearError;
+	private WebElement cardExpiryYearError;
 
 	@FindBy(id = "cc_cvv_span")
-	private static WebElement cvvNumberError;
+	private WebElement cvvNumberError;
 
 	public void fillBookingDetailsAndBook(int rowIndex) {
-
+		log.info("Filling booking details for TestCaseID: {}", ExcelUtils.getDataByColumnName(rowIndex, "Test Case ID"));
 		firstName.sendKeys(ExcelUtils.getDataByColumnName(rowIndex, "First Name"));
 		lastName.sendKeys(ExcelUtils.getDataByColumnName(rowIndex, "Last name"));
 		billingAddress.sendKeys(ExcelUtils.getDataByColumnName(rowIndex, "Address"));
@@ -86,16 +89,19 @@ public class BookingPage {
 		expiryYear.sendKeys(ExcelUtils.getDataByColumnName(rowIndex, "CC Expiry Year"));
 		cvv.sendKeys(ExcelUtils.getDataByColumnName(rowIndex, "CVV"));
 		clickBookNow();
-		ExtentReportListener.logStep("Booking details filled and booking submitted for : "
+		ExtentReportListener.logStep("Booking details filled and submitted for Test Case: "
 				+ ExcelUtils.getDataByColumnName(rowIndex, "Test Case ID"));
+		log.info("Booking form submitted.");
 	}
 
 	public void clickBookNow() {
 		bookNowButton.click();
+		log.info("Clicked Book Now button.");
 	}
 
 	public void clickCancel() {
 		cancelButton.click();
+		log.info("Clicked Cancel button on Booking Page.");
 	}
 
 	public String getAndValidateOrderNumber() {
@@ -105,33 +111,43 @@ public class BookingPage {
 			try {
 				Assert.assertNotNull(orderNumber, "Order ID should not be null.");
 				ExtentReportListener.logStepPass("Order ID generated successfully: " + orderNumber);
+				log.info("Order ID retrieved successfully: {}", orderNumber);
 			} catch (AssertionError e) {
-				ExtentReportListener
-						.logStepFail("Order ID validation failed. Expected an order number, but it was null.");
+				ExtentReportListener.logStepFail("Order ID is null.");
+				log.error("Order ID validation failed. Expected non-null, but was null.");
 				throw e;
 			}
 		}
 		return orderNumber;
 	}
 
-	public static String getBookingPageErrorMessage() {
+	public String getBookingPageErrorMessage() {
 		if (ElementUtils.isElementVisible(firstNameError)) {
+			log.warn("First name error: {}", firstNameError.getText());
 			return firstNameError.getText();
 		} else if (ElementUtils.isElementVisible(lastNameError)) {
+			log.warn("Last name error: {}", lastNameError.getText());
 			return lastNameError.getText();
 		} else if (ElementUtils.isElementVisible(addressError)) {
+			log.warn("Address error: {}", addressError.getText());
 			return addressError.getText();
 		} else if (ElementUtils.isElementVisible(creditCardNumberError)) {
+			log.warn("Credit Card Number error: {}", creditCardNumberError.getText());
 			return creditCardNumberError.getText();
 		} else if (ElementUtils.isElementVisible(cardTypeError)) {
+			log.warn("Card Type error: {}", cardTypeError.getText());
 			return cardTypeError.getText();
 		} else if (ElementUtils.isElementVisible(cardExpiryMonthError)) {
+			log.warn("Expiry Month error: {}", cardExpiryMonthError.getText());
 			return cardExpiryMonthError.getText();
 		} else if (ElementUtils.isElementVisible(cardExpiryYearError)) {
+			log.warn("Expiry Year error: {}", cardExpiryYearError.getText());
 			return cardExpiryYearError.getText();
 		} else if (ElementUtils.isElementVisible(cvvNumberError)) {
+			log.warn("CVV error: {}", cvvNumberError.getText());
 			return cvvNumberError.getText();
 		}
+		log.info("No error message displayed.");
 		return "No error message displayed";
 	}
 }

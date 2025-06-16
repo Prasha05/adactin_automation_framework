@@ -8,21 +8,24 @@ import org.testng.Assert;
 
 import com.adactinautomation.utilities.ExcelUtils;
 import com.adactinautomation.utilities.ExtentReportListener;
+import com.adactinautomation.utilities.LoggerHelper;
+import org.apache.logging.log4j.Logger;
 
 public class BookingConfirmationPage {
     WebDriver driver;
+    private static final Logger log = LoggerHelper.getLogger(BookingConfirmationPage.class);
 
     @FindBy(id = "hotel_name")
-    WebElement hotelName;
+    private WebElement hotelName;
 
     @FindBy(id = "location")
-    WebElement location;
+    private WebElement location;
 
     @FindBy(id = "room_type")
-    WebElement roomType;
+    private WebElement roomType;
 
     @FindBy(id = "total_price")
-    WebElement totalPrice;
+    private WebElement totalPrice;
 
     public BookingConfirmationPage(WebDriver driver) {
         this.driver = driver;
@@ -44,29 +47,33 @@ public class BookingConfirmationPage {
     public String getTotalPrice() {
         return totalPrice.getDomAttribute("value");
     }
+
     public void bookingConfirmation(int rowIndex, String orderNumber) throws InterruptedException {
-    	String actualHotelName = getHotelName();
+        String actualHotelName = getHotelName();
         String actualLocation = getLocation();
         String actualRoomType = getRoomType();
-//        String actualTotalPrice = getTotalPrice();
+
         String expectedHotelName = ExcelUtils.getDataByColumnName(rowIndex, "Hotels");
         String expectedLocation = ExcelUtils.getDataByColumnName(rowIndex, "Location");
         String expectedRoomType = ExcelUtils.getDataByColumnName(rowIndex, "Room Type");
 
-//        String expectedTotalPrice = ExcelUtils.getDataByColumnName(rowIndex, "TotalPrice");
-        if (actualHotelName.trim().equalsIgnoreCase(expectedHotelName.trim()) &&
-        	    actualLocation.trim().equalsIgnoreCase(expectedLocation.trim()) &&
-        	    actualRoomType.trim().equalsIgnoreCase(expectedRoomType.trim())) {
+        log.info("Verifying booking confirmation for Order ID: {}", orderNumber);
+        log.info("Expected: Hotel = {}, Location = {}, Room Type = {}", expectedHotelName, expectedLocation, expectedRoomType);
+        log.info("Actual: Hotel = {}, Location = {}, Room Type = {}", actualHotelName, actualLocation, actualRoomType);
 
-        	ExtentReportListener.logStep("Booking confirmation details match with input data for the order ID: " + orderNumber);
-        	} else {
-        		ExtentReportListener.logStep("Booking confirmation details do not match with input data.");
-        		ExtentReportListener.logStep("Expected: " + expectedHotelName + ", " + expectedLocation + ", " + expectedRoomType);
-        		ExtentReportListener.logStep("Actual: " + actualHotelName + ", " + actualLocation + ", " + actualRoomType);
-        		Assert.fail("Validation failed! Expected: " + expectedHotelName + ", " + expectedLocation + ", " + expectedRoomType +
+        if (actualHotelName.trim().equalsIgnoreCase(expectedHotelName.trim()) &&
+            actualLocation.trim().equalsIgnoreCase(expectedLocation.trim()) &&
+            actualRoomType.trim().equalsIgnoreCase(expectedRoomType.trim())) {
+
+            ExtentReportListener.logStep("Booking confirmation details match with input data for the order ID: " + orderNumber);
+            log.info("Booking confirmation matched successfully for Order ID: {}", orderNumber);
+        } else {
+            ExtentReportListener.logStep("Booking confirmation details do not match with input data.");
+            ExtentReportListener.logStep("Expected: " + expectedHotelName + ", " + expectedLocation + ", " + expectedRoomType);
+            ExtentReportListener.logStep("Actual: " + actualHotelName + ", " + actualLocation + ", " + actualRoomType);
+            log.error("Booking confirmation mismatch for Order ID: {}", orderNumber);
+            Assert.fail("Validation failed! Expected: " + expectedHotelName + ", " + expectedLocation + ", " + expectedRoomType +
                         " but got: " + actualHotelName + ", " + actualLocation + ", " + actualRoomType);
         }
-        	}
-
     }
-
+}

@@ -6,9 +6,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.adactinautomation.utilities.ExtentReportListener;
+import com.adactinautomation.utilities.LoggerHelper;
+import org.apache.logging.log4j.Logger;
 
 public class SelectHotelPage {
 	public WebDriver driver;
+	private static final Logger log = LoggerHelper.getLogger(SelectHotelPage.class);
 
 	public SelectHotelPage(WebDriver driver) {
 		this.driver = driver;
@@ -16,29 +19,33 @@ public class SelectHotelPage {
 	}
 
 	@FindBy(id = "radiobutton_0")
-	public static WebElement selectRadioButton;
+	private WebElement selectRadioButton;
+
 	@FindBy(id = "continue")
-	public static WebElement continueButton;
+	private WebElement continueButton;
+
 	@FindBy(id = "cancel")
-	public WebElement cancelButton;
-	
-	
+	private WebElement cancelButton;
 
-	public void Cancel() {
+	public void cancel() {
 		cancelButton.click();
+		log.info("Clicked on Cancel button in SelectHotelPage");
 	}
 
-	public static void selectHotelClick() {
+	public void selectHotelClick() {
 		selectRadioButton.click();
+		log.info("Selected hotel radio button.");
 	}
 
-	public static void continueClick() {
+	public void continueClick() {
 		continueButton.click();
+		log.info("Clicked on Continue button.");
 	}
+
 	public void selectHotel() {
 		selectHotelClick();
 		continueClick();
 		ExtentReportListener.logStep("Hotel selected successfully and clicked continue button.");
+		log.info("Hotel selection process completed.");
 	}
-
 }

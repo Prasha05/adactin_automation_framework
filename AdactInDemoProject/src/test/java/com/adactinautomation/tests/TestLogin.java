@@ -21,7 +21,7 @@ public class TestLogin extends BaseTest {
 		pages.getLoginPage().loginToApplication(ConfigReader.getProperty("username"),
 				ConfigReader.getProperty("password"));
 		ExtentReportListener.logStep("Entered valid credentials.");
-		validatePageTitle(driver.getTitle(),"Adactin.com - Search Hotel");
+		validatePageTitle(driver.getTitle(), "Adactin.com - Search Hotel");
 	}
 
 	@Test(priority = 2)

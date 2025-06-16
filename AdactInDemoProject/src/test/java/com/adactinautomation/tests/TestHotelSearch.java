@@ -24,7 +24,7 @@ public class TestHotelSearch extends BaseTest {
 		for (int rowIndex : rowIndices) {
 			pages.getSearchHotelPage().fillSearchDetailsAndSearch(rowIndex);
 			validatePageTitle(driver.getTitle(), "Adactin.com - Select Hotel");
-			pages.getSelectHotelPage().Cancel();
+			pages.getSelectHotelPage().cancel();
 		}
 	}
 

@@ -8,13 +8,17 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.adactinautomation.utilities.ElementUtils;
 import com.adactinautomation.utilities.ExtentReportListener;
+import com.adactinautomation.utilities.LoggerHelper;
+
+import org.apache.logging.log4j.Logger;
 
 public class BookedItineraryPage {
 
 	WebDriver driver;
-	
+	private static final Logger log = LoggerHelper.getLogger(BookedItineraryPage.class);
+
 	public BookedItineraryPage(WebDriver driver) {
-		this.driver=driver;
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 
@@ -26,20 +30,19 @@ public class BookedItineraryPage {
 
 	@FindBy(xpath = "(//input[@name='ids[]'])[1]")
 	private WebElement firstbookingCheckbox;
-	
-	@FindBy(name="check_all")
+
+	@FindBy(name = "check_all")
 	private WebElement allBookingCheckbox;
 
 	@FindBy(xpath = "//input[@name='cancelall']")
 	private WebElement cancelButton;
-	
-	@FindBy(id = "search_result_error")
-    private WebElement successMessage;
 
-	
+	@FindBy(id = "search_result_error")
+	private WebElement successMessage;
 
 	public void goToBookedItineraryPage() {
 		bookedItineraryButton.click();
+		log.info("Navigated to Booked Itinerary page.");
 	}
 
 	public void cancelFirstBooking() {
@@ -48,10 +51,13 @@ public class BookedItineraryPage {
 			cancelButton.click();
 			ElementUtils.acceptAlert(driver);
 			ExtentReportListener.logStep("First booking cancelled successfully.");
-		} catch (NoSuchElementException  e) {
+			log.info("First booking cancelled successfully.");
+		} catch (NoSuchElementException e) {
 			ExtentReportListener.logStep("No bookings found to cancel.");
+			log.warn("No bookings found to cancel - Element not found.");
 		}
 	}
+
 	public void cancelAllBooking() {
 		try {
 			firstbookingCheckbox.click();
@@ -59,14 +65,16 @@ public class BookedItineraryPage {
 			cancelButton.click();
 			ElementUtils.acceptAlert(driver);
 			ExtentReportListener.logStep("Selected and cancelled all bookings from the Booked Itinerary Page.");
+			log.info("All bookings cancelled successfully.");
 		} catch (Exception e) {
 			ExtentReportListener.logStep("No bookings found to cancel.");
+			log.warn("Failed to cancel all bookings. Possibly no bookings found.");
 		}
-
 	}
-	public boolean isCancellationSuccessful() {
-        return successMessage.isDisplayed();
-    }
-	
 
+	public boolean isCancellationSuccessful() {
+		boolean visible = successMessage.isDisplayed();
+		log.info("Cancellation success message visible: {}", visible);
+		return visible;
+	}
 }
