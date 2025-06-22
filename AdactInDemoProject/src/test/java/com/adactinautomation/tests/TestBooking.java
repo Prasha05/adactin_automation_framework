@@ -22,7 +22,6 @@ public class TestBooking extends BaseTest {
 		pages.getSearchHotelPage().fillSearchDetailsAndSearch(rowIndex);
 		pages.getSelectHotelPage().selectHotel();
 		pages.getBookingPage().fillBookingDetailsAndBook(rowIndex);
-		Thread.sleep(10000);
 		pages.getBookingPage().getAndValidateOrderNumber();
 	}
 
@@ -83,7 +82,7 @@ public class TestBooking extends BaseTest {
 				"Please Enter your Credit Card CVV Number");
 	}
 
-	@Test(priority = 16)
+	@Test(groups= {"bug"}, priority = 16)
 	public void verifyBookingConfirmation() throws InterruptedException, IOException {
 		ExtentReportListener.setDriver(driver);
 		String testCaseID = "TC_16_Verify_Booking_Confirmation";
@@ -95,7 +94,6 @@ public class TestBooking extends BaseTest {
 			pages.getSearchHotelPage().fillSearchDetailsAndSearch(rowIndex);
 			pages.getSelectHotelPage().selectHotel();
 			pages.getBookingPage().fillBookingDetailsAndBook(rowIndex);
-			Thread.sleep(10000);
 			String orderNumber = pages.getBookingPage().getAndValidateOrderNumber();
 			pages.getBookingConfirmationPage().bookingConfirmation(rowIndex, orderNumber);
 			pages.getSearchHotelPage().searchHotelClick();

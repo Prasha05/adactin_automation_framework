@@ -86,9 +86,8 @@ public class SearchHotelPage {
 		setInputField(checkOutInput, ExcelUtils.getDataByColumnName(rowIndex, "Check-Out Date"));
 		selectDropdown(adultsDropdown, ExcelUtils.getDataByColumnName(rowIndex, "Adults per Room"));
 		selectDropdown(childDropdown, ExcelUtils.getDataByColumnName(rowIndex, "Children per Room"));
-		
 		clickSearch();
-
+		ElementUtils.waitForElementVisible(driver,"//td[contains(text(), \"Select Hotel \")]");//wait for select hotel page visibility
 		ExtentReportListener.logStep("Search details filled for : " + testCaseId + " and search initiated.");
 		log.info("Search initiated for Test Case ID: {}", testCaseId);
 	}

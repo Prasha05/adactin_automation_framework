@@ -92,6 +92,7 @@ public class BookingPage {
 		ExtentReportListener.logStep("Booking details filled and submitted for Test Case: "
 				+ ExcelUtils.getDataByColumnName(rowIndex, "Test Case ID"));
 		log.info("Booking form submitted.");
+		ElementUtils.setImplicitWait(5, driver);
 	}
 
 	public void clickBookNow() {

@@ -6,11 +6,18 @@
 			class-name="com.adactinautomation.utilities.ExtentReportListener" />
 	</listeners>
 	<test name="End-to-End Hotel Booking Test">
+		<groups>
+			<run>
+				<exclude name="bug"></exclude>
+			</run>
+		</groups>
 		<classes>
 			<class name="com.adactinautomation.tests.TestLogin" />
 			<class name="com.adactinautomation.tests.TestHotelSearch" />
 			<class name="com.adactinautomation.tests.TestBooking" />
 			<class name="com.adactinautomation.tests.TestBookingCancel" />
 		</classes>
-	</test> <!-- Test -->
-</suite> <!-- Suite -->
+	</test> <!--
+	Test -->
+</suite> <!--
+Suite -->

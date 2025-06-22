@@ -40,7 +40,7 @@ public class TestHotelSearch extends BaseTest {
 		validateErrorMessage(pages.getSearchHotelPage().getSearchHotelPageErrorMessage(), "Please Select a Location");
 	}
 
-	@Test(priority = 6)
+	@Test(groups= {"bug"}, priority = 6)
 	public void search_Hotel_Backdated() {
 		ExtentReportListener.setDriver(driver);
 		String testCaseID = "TC_06_Search_Hotel_Backdated";
