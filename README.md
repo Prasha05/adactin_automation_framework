@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a comprehensive automation testing framework built for the Adactin Hotel Demo website. It follows industry-standard best practices using **Selenium WebDriver**, **Java**, and the **Page Object Model (POM)**. The framework is structured using **Maven**, and integrates **TestNG** for test execution, **Apache POI** for data-driven testing, **Extent Reports** for reporting, and **Log4j 2** for detailed logging.
+This project is a comprehensive automation testing framework built for the Adactin Hotel Demo website. It follows industry-standard best practices using **Selenium WebDriver**, **Java**, and the **Page Object Model (POM)**. The framework is structured using **Maven**, and integrates **TestNG** for test execution, **Apache POI** for data-driven testing, **Extent Reports** for reporting, and **Log4j 2** for detailed logging and and **Jenkins** for basic CI/CD integration.
 
 ## Features
 
@@ -71,7 +71,7 @@ src/
 
 ## Author
 
-**Prasanth T**
-[🔗 LinkedIn Profile](https://www.linkedin.com/in/prasanth-thanikachalam)
+**Prasanth Thanikachalam**
+[🔗 LinkedIn](https://www.linkedin.com/in/prasanth-thanikachalam)
 
 > This project is a self-learning initiative to demonstrate real-world test automation using best practices.
