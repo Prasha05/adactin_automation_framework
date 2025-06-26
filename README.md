@@ -13,7 +13,7 @@ This project is a comprehensive automation testing framework built for the Adact
 - ✅ **Apache POI** – For reading test data from Excel files.
 - ✅ **Extent Reports** – For visual HTML test reporting.
 - ✅ **Log4j 2** – For structured logging (file-based).
-- 🔄 **Jenkins** – Planned for future CI/CD integration.
+- ✅ **Jenkins** – Basic CI/CD setup completed for automated test runs.
 
 ## 📁 Project Structure
 
@@ -51,6 +51,7 @@ src/
 3. Run tests using:
    - `mvn clean test`
    - or through your IDE with TestNG
+4. For Jenkins: Set up a job and use mvn clean test in the build step.
 
 ## Logging
 
@@ -65,11 +66,12 @@ src/
 
 ## Future Enhancements
 
-- 🔄 CI/CD integration using Jenkins.
 - ✏️ Expand test coverage with more scenarios and validation logic.
+- 🔍 Integrate email reporting and Slack alerts via Jenkins.
 
 ## Author
 
 **Prasanth T**
+[🔗 LinkedIn Profile](https://www.linkedin.com/in/prasanth-thanikachalam)
 
 > This project is a self-learning initiative to demonstrate real-world test automation using best practices.
